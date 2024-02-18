@@ -34,11 +34,12 @@ export function getSnakeHead() {
 }
 
 export function snakeIntersection() {
-
+    return onSnake(snakeBody[0], { ignoreHead: true })
 }
 
-export function onSnake(position) {
-    return snakeBody.some(segment => {
+export function onSnake(position, {ignoreHead = false} = {}) {
+    return snakeBody.some((segment, index) => {
+        if(ignoreHead && index === 0) return false
         return equalPositions(segment, position)
     })
 }
